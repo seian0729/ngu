@@ -1,5 +1,5 @@
 --[[
-Create By: Chim#2575
+Create By: [Chim#257 Discord disabled my account :))] / Chim#0889
 Thank CuttingEdgeAsmr @ v3million for Mob List
 More Function Soon!
 v0.0.1 - 10:30 PM - 31/07/2020 GMT+ 7 -- D/M/Y
