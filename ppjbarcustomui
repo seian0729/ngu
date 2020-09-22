@@ -1,0 +1,335 @@
+local chaygim = {}
+local TweenService = game:GetService('TweenService')
+
+
+for _,v in pairs(game:GetService('CoreGui'):GetDescendants()) do
+	if v:IsA('IntValue') and v.Name == 'chaygims' then
+		v.Parent:Destroy()
+	end
+end
+
+
+local UIS = game:GetService("UserInputService");
+local Heartbeat = game:GetService("RunService").Heartbeat;
+
+local dragger = {};
+
+do
+	local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
+	local inputService = game:GetService('UserInputService');
+	local heartbeat    = game:GetService("RunService").Heartbeat;
+	
+	-- // credits to Ririchi / Inori for this cute drag function :)
+	function dragger.new(frame, secondlol)
+		frame.Active = true;
+		secondlol.Active = true;
+		
+		secondlol.MouseLeave:connect(function()
+			IsInFrame = false;
+		end)
+		
+		secondlol.MouseEnter:connect(function()
+			IsInFrame = true;
+		end)
+		
+		local input = secondlol.InputBegan:connect(function(key)
+			if key.UserInputType == Enum.UserInputType.MouseButton1 and IsInFrame then
+				local objectPosition = Vector2.new(mouse.X - frame.AbsolutePosition.X, mouse.Y - frame.AbsolutePosition.Y);
+				while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+					pcall(function()
+						frame:TweenPosition(UDim2.new(0, mouse.X - objectPosition.X + (frame.Size.X.Offset * frame.AnchorPoint.X), 0, mouse.Y - objectPosition.Y + (frame.Size.Y.Offset * frame.AnchorPoint.Y)), 'Out', 'Linear', 0.01, true);
+					end)
+				end
+			end
+		end)
+	end
+end
+chaygim.gui = Instance.new("ScreenGui")
+chaygim.gui.Parent = game:WaitForChild('CoreGui')
+chaygim.gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+chaygim.gui.Name = game:GetService("HttpService"):GenerateGUID(false):lower():sub(1, 10);
+chaygim.toggled = true
+
+
+function chaygim:CreateMain(Name)
+	local Main = Instance.new("ImageLabel")
+	local Topcontainer = Instance.new("ImageLabel")
+	local UIGradient = Instance.new("UIGradient")
+	local Topbutton = Instance.new("TextButton")
+	local ImageLabel = Instance.new("ImageLabel")
+	local TextLabel = Instance.new("TextLabel")
+	local UIListLayout = Instance.new("UIListLayout")
+	local ToggleFrame = Instance.new("Frame")
+	local LabelFrame = Instance.new("Frame")
+	local LabelText = Instance.new("TextLabel")
+	local LabelText1 = Instance.new("TextLabel")
+	local UIGridLayout = Instance.new("UIGridLayout")
+
+	
+	Main.Name = "Main"
+	Main.Parent = chaygim.gui
+	Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Main.BackgroundTransparency = 1.000
+	Main.ClipsDescendants = true
+	Main.Position = UDim2.new(0.45, 0, 0.38, 0)
+	Main.Size = UDim2.new(0, 250, 0, 115)
+	Main.Image = "rbxassetid://4550094458"
+	Main.ImageColor3 = Color3.fromRGB(56, 56, 56)
+	Main.ScaleType = Enum.ScaleType.Slice
+	Main.SliceCenter = Rect.new(4, 4, 296, 296)
+	
+	dragger.new(Main,Main)
+	
+	Topcontainer.Name = "Topcontainer"
+	Topcontainer.Parent = Main
+	Topcontainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Topcontainer.BackgroundTransparency = 1.000
+	Topcontainer.Size = UDim2.new(1, 0, 0, 20)
+	Topcontainer.ZIndex = 2
+	Topcontainer.Image = "rbxassetid://4550094255"
+	Topcontainer.ImageColor3 = Color3.fromRGB(255, 255, 2554)
+	Topcontainer.ScaleType = Enum.ScaleType.Slice
+	Topcontainer.SliceCenter = Rect.new(4, 4, 296, 296)
+	
+	UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(26, 75, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(37, 131, 255))}
+	UIGradient.Parent = Topcontainer
+	
+	Topbutton.Name = "Topbutton"
+	Topbutton.Parent = Topcontainer
+	Topbutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Topbutton.BackgroundTransparency = 1.000
+	Topbutton.Position = UDim2.new(1, -25, 0, 0)
+	Topbutton.Size = UDim2.new(0, 20, 0, 20)
+	Topbutton.ZIndex = 2
+	Topbutton.Font = Enum.Font.SourceSans
+	Topbutton.Text = ""
+	Topbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Topbutton.TextSize = 14.000
+	
+	ImageLabel.Parent = Topbutton
+	ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ImageLabel.BackgroundTransparency = 1.000
+	ImageLabel.Rotation = 90.000
+	ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+	ImageLabel.ZIndex = 2
+	ImageLabel.Image = "http://www.roblox.com/asset/?id=4765412721"
+	
+	TextLabel.Parent = Topcontainer
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.Position = UDim2.new(0, 5, 0, 0)
+	TextLabel.Size = UDim2.new(1, -30, 1, 0)
+	TextLabel.ZIndex = 2
+	TextLabel.Font = Enum.Font.GothamBold
+	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.TextSize = 14.000
+	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+	TextLabel.Text = Name
+	
+	UIListLayout.Parent = Main
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 5)
+	
+	ToggleFrame.Name = "ToggleFrame"
+	ToggleFrame.Parent = Main
+	ToggleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ToggleFrame.BackgroundTransparency = 1.000
+	ToggleFrame.LayoutOrder = 2
+	ToggleFrame.Position = UDim2.new(0, 0, 0.3125, 0)
+	ToggleFrame.Size = UDim2.new(0, 250, 0, 55)
+	
+	UIGridLayout.Parent = ToggleFrame
+	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIGridLayout.CellSize = UDim2.new(0, 122, 0, 25)
+	
+
+	
+	local uitoggled  = false
+	Topbutton.MouseButton1Click:connect(function()
+		uitoggled = not uitoggled
+		local UISize = uitoggled and UDim2.new(0,250,0,20) or UDim2.new(0,250,0,115)
+		local UIgido = uitoggled and "Out" or 'In'
+		local IconRotation = uitoggled and 0 or 90
+		TweenService:Create(ImageLabel,TweenInfo.new(0.3),{Rotation=IconRotation}):Play()
+		if uitoggled == true then
+			Main.ClipsDescendants = true
+			Main:TweenSize(UISize, UIgido, "Quad", 0.3, true)
+		end
+		if uitoggled == false then
+			Main:TweenSize(UISize, UIgido, "Quad", 0.3, true) wait(.3)
+			Main.ClipsDescendants = true
+		end
+	end)
+	
+	local chaygimsss = {}
+	
+	function chaygimsss:Label(Name)
+		
+		local labels = {}
+		
+		LabelFrame.Name = "LabelFrame"
+		LabelFrame.Parent = Main
+		LabelFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		LabelFrame.BackgroundTransparency = 1.000
+		LabelFrame.Position = UDim2.new(0, 0, 0.238095239, 0)
+		LabelFrame.Size = UDim2.new(0, 250, 0, 25)
+		
+		LabelText1.Name = "LabelText"
+		LabelText1.Parent = LabelFrame
+		LabelText1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		LabelText1.BackgroundTransparency = 1.000
+		LabelText1.Position = UDim2.new(0, 5, 0, 0)
+		LabelText1.Size = UDim2.new(1, -40, 1, 0)
+		LabelText1.Font = Enum.Font.GothamBold
+		LabelText1.TextColor3 = Color3.fromRGB(255, 255, 255)
+		LabelText1.TextSize = 14.000
+		LabelText1.TextXAlignment = Enum.TextXAlignment.Left
+		LabelText1.Text = 'Status: ' 
+		
+		LabelText.Name = "LabelText"
+		LabelText.Parent = LabelFrame
+		LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		LabelText.BackgroundTransparency = 1.000
+		LabelText.Position = UDim2.new(0, 55, 0, 0)
+		LabelText.Size = UDim2.new(1, -35, 1, 0)
+		LabelText.Font = Enum.Font.GothamBold
+		LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
+		LabelText.TextSize = 14.000
+		LabelText.TextXAlignment = Enum.TextXAlignment.Left
+		LabelText.Text = Name 
+		
+		function labels:SetText()
+			return LabelText
+		end
+		
+		return labels
+		
+	end
+	
+	function chaygimsss:Toggle(Name,Callback)
+	    
+	Callback = Callback or function() end
+					local Stage = false
+					
+					local InToggleFrame = Instance.new("Frame")
+					local ToggleButton = Instance.new("TextButton")
+					local checkbox = Instance.new("ImageLabel")
+					local UIGradient = Instance.new("UIGradient")
+					local fill = Instance.new("ImageLabel")
+					local check = Instance.new("ImageLabel")
+					local UIGradient_2 = Instance.new("UIGradient")
+					local ToggleLabel = Instance.new("TextLabel")
+					
+					
+					InToggleFrame.Name = "InToggleFrame"
+					InToggleFrame.Parent = ToggleFrame
+					InToggleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					InToggleFrame.BackgroundTransparency = 1.000
+					InToggleFrame.Size = UDim2.new(0.5, 0, 1, 0)
+					
+					ToggleButton.Name = "ToggleButton"
+					ToggleButton.Parent = InToggleFrame
+					ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					ToggleButton.BackgroundTransparency = 1.000
+					ToggleButton.Size = UDim2.new(1, 0, 1, 0)
+					ToggleButton.Font = Enum.Font.SourceSans
+					ToggleButton.Text = ""
+					ToggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+					ToggleButton.TextSize = 14.000
+					
+					checkbox.Name = "checkbox"
+					checkbox.Parent = ToggleButton
+					checkbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					checkbox.BackgroundTransparency = 1.000
+					checkbox.Position = UDim2.new(1, -30, 0, 0)
+					checkbox.Size = UDim2.new(0, 25, 0, 25)
+					checkbox.Image = "rbxassetid://4552505888"
+					
+					UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(26, 75, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(37, 131, 255))}
+					UIGradient.Parent = checkbox
+					
+					fill.Name = "fill"
+					fill.AnchorPoint = Vector2.new(.5,.5)
+					fill.Parent = checkbox
+					fill.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					fill.BackgroundTransparency = 1.000
+					fill.Size = UDim2.new(0, 0, 0, 0)
+					fill.Position = UDim2.new(.5,0,.5,0)
+					fill.Image = "rbxassetid://4555402813"
+					fill.ImageTransparency = 1
+					
+					check.Name = "check"
+					check.Parent = fill
+					check.AnchorPoint = Vector2.new(0.5, 0.5)
+					check.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					check.BackgroundTransparency = 1.000
+					check.Position = UDim2.new(0.5, 0, 0.5, 0)
+					check.Size = UDim2.new(1, -4, 1, -4)
+					check.Image = "rbxassetid://4555411759"
+					check.ImageTransparency = 1
+					
+					UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(26, 75, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(37, 131, 255))}
+					UIGradient_2.Parent = fill
+					
+					ToggleLabel.Name = "ToggleLabel"
+					ToggleLabel.Parent = InToggleFrame
+					ToggleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					ToggleLabel.BackgroundTransparency = 1.000
+					ToggleLabel.Position = UDim2.new(0, 5, 0, 0)
+					ToggleLabel.Size = UDim2.new(1, -35, 1, 0)
+					ToggleLabel.Font = Enum.Font.GothamBold
+					ToggleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+					ToggleLabel.TextSize = 14.000
+					ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+					ToggleLabel.Text = Name
+					if string.len(ToggleLabel.Text) > 10 then 
+					    ToggleLabel.TextScaled = true
+					    end
+					
+					ToggleButton.MouseButton1Click:Connect(function()
+						Stage = not Stage 
+						local imagetran = Stage and 0 or 1 
+						local imagesize = Stage and UDim2.new(1,0,1,0) or UDim2.new(0,0,0,0)
+						TweenService:Create(fill,TweenInfo.new(.25),{Size = imagesize,ImageTransparency = imagetran}):Play()
+						TweenService:Create(check,TweenInfo.new(.25),{ImageTransparency = imagetran}):Play()
+						Callback(Stage)
+					end)
+					
+	end
+	
+	local Ngu= Instance.new('IntValue',chaygim.gui )
+	Ngu.Name = 'chaygims'
+	
+	return chaygimsss
+	
+	
+end
+
+
+local function writetext(obj,text)
+	for i=1,#text do 
+		obj.Text = string.sub(text,1,i)
+		wait(0.05)
+	end
+end
+
+local function deletext(obj,text)
+	for i=1,#text do 
+		obj.Text = string.sub(text,1,(#text-i))
+		wait(0.05)
+	end
+end
+
+local mess = Instance.new('Message',workspace)
+writetext(mess,'Script By: Hazed#0002 - Custum UI: Chim#0889')
+wait(5)
+mess:Destroy()
+
+local main = chaygim:CreateMain('Paypal - Jailbreak Auto Rob')
+local label = main:Label('Off')
+getgenv().textstat = label:SetText()
+local Autorob = main:Toggle('Auto Rob',function(v) getgenv().AutoRob = v end)
+local BreakOut = main:Toggle('Auto Breakout',function(v) getgenv().killaura = v end)
+local KillAura = main:Toggle('Kill Aura',function(v) getgenv().BreakOut = v end)
+getgenv().customui = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HazeWasTaken/JailedHax/master/AutRob"))()
