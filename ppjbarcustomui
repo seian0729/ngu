@@ -72,7 +72,7 @@ function chaygim:CreateMain(Name)
 	Main.BackgroundTransparency = 1.000
 	Main.ClipsDescendants = true
 	Main.Position = UDim2.new(0.45, 0, 0.38, 0)
-	Main.Size = UDim2.new(0, 250, 0, 115)
+	Main.Size = UDim2.new(0, 300, 0, 143)
 	Main.Image = "rbxassetid://4550094458"
 	Main.ImageColor3 = Color3.fromRGB(56, 56, 56)
 	Main.ScaleType = Enum.ScaleType.Slice
@@ -136,18 +136,18 @@ function chaygim:CreateMain(Name)
 	ToggleFrame.BackgroundTransparency = 1.000
 	ToggleFrame.LayoutOrder = 2
 	ToggleFrame.Position = UDim2.new(0, 0, 0.3125, 0)
-	ToggleFrame.Size = UDim2.new(0, 250, 0, 55)
+	ToggleFrame.Size = UDim2.new(0, 300, 0, 55)
 	
 	UIGridLayout.Parent = ToggleFrame
 	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIGridLayout.CellSize = UDim2.new(0, 122, 0, 25)
+	UIGridLayout.CellSize = UDim2.new(0, 147, 0, 25)
 	
 
 	
 	local uitoggled  = false
 	Topbutton.MouseButton1Click:connect(function()
 		uitoggled = not uitoggled
-		local UISize = uitoggled and UDim2.new(0,250,0,20) or UDim2.new(0,250,0,115)
+		local UISize = uitoggled and UDim2.new(0,300,0,20) or UDim2.new(0,300,0,143)
 		local UIgido = uitoggled and "Out" or 'In'
 		local IconRotation = uitoggled and 0 or 90
 		TweenService:Create(ImageLabel,TweenInfo.new(0.3),{Rotation=IconRotation}):Play()
@@ -163,7 +163,7 @@ function chaygim:CreateMain(Name)
 	
 	local chaygimsss = {}
 	
-	function chaygimsss:Label(Name)
+	function chaygimsss:LabelStatus(Name)
 		
 		local labels = {}
 		
@@ -172,7 +172,7 @@ function chaygim:CreateMain(Name)
 		LabelFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		LabelFrame.BackgroundTransparency = 1.000
 		LabelFrame.Position = UDim2.new(0, 0, 0.238095239, 0)
-		LabelFrame.Size = UDim2.new(0, 250, 0, 25)
+		LabelFrame.Size = UDim2.new(0, 300, 0, 25)
 		
 		LabelText1.Name = "LabelText"
 		LabelText1.Parent = LabelFrame
@@ -205,6 +205,70 @@ function chaygim:CreateMain(Name)
 		return labels
 		
 	end
+	
+	function chaygimsss:Label()
+	
+	local labelbucu = {}
+	
+	local LabelFrame = Instance.new("Frame")
+	LabelFrame.Name = "LabelFrame"
+	LabelFrame.Parent = Main
+	LabelFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	LabelFrame.BackgroundTransparency = 1.000
+	LabelFrame.Position = UDim2.new(0, 0, 0.238095239, 0)
+	LabelFrame.Size = UDim2.new(0, 300, 0, 25)
+	
+	local UIGridLayout = Instance.new("UIGridLayout")
+    UIGridLayout.Parent = LabelFrame
+	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIGridLayout.CellSize = UDim2.new(0, 147, 0, 25)
+	
+	function labelbucu:AddLabel(Name)
+	    
+	    local labelsuccac = {}
+	    
+	    local LabelText = Instance.new("TextLabel")
+	
+	    local nguframe = Instance.new("Frame")
+	    nguframe.Name = "LabelFrame"
+	    nguframe.Parent = LabelFrame
+	    nguframe.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	    nguframe.BackgroundTransparency = 1.000
+	    nguframe.Position = UDim2.new(0, 0, 0.238095239, 0)
+	    nguframe.Size = UDim2.new(0, 250, 0, 25)
+		
+		LabelText.Name = "LabelText"
+		LabelText.Parent = nguframe
+		LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		LabelText.BackgroundTransparency = 1.000
+		LabelText.Position = UDim2.new(0, 5, 0, 0)
+		LabelText.Size = UDim2.new(1, -5, 1, 0)
+		LabelText.Font = Enum.Font.GothamBold
+		LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
+		LabelText.TextSize = 14.000
+		LabelText.TextXAlignment = Enum.TextXAlignment.Left
+		LabelText.Text = Name 
+		 if string.len(LabelText.Text) >  18 then 
+		        LabelText.TextScaled = true
+		 end
+	    
+		function labelsuccac:SetText(Text)
+		    if string.len(Text) >  18 then 
+		        LabelText.TextScaled = true
+		        else
+		         LabelText.TextScaled = false   
+		    end
+		    LabelText.Text = Text
+		end
+		
+		return labelsuccac
+		
+		end
+	    
+	    return labelbucu
+	    
+	
+	    end
 	
 	function chaygimsss:Toggle(Name,Callback)
 	    
@@ -282,7 +346,7 @@ function chaygim:CreateMain(Name)
 					ToggleLabel.TextSize = 14.000
 					ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
 					ToggleLabel.Text = Name
-					if string.len(ToggleLabel.Text) > 10 then 
+					if string.len(ToggleLabel.Text) > 18 then 
 					    ToggleLabel.TextScaled = true
 					    end
 					
@@ -319,17 +383,67 @@ local function deletext(obj,text)
 		wait(0.05)
 	end
 end
-
+--[[
 local mess = Instance.new('Message',workspace)
 writetext(mess,'Script By: Hazed#0002 - Custum UI: Chim#0889')
 wait(5)
-mess:Destroy()
+mess:Destroy()]]
 
 local main = chaygim:CreateMain('Paypal - Jailbreak Auto Rob')
-local label = main:Label('Off')
-getgenv().textstat = label:SetText()
+local labelstatus = main:LabelStatus('Off')
+getgenv().textstat = labelstatus:SetText()
+local labels = main:Label()
+Elapsed = labels:AddLabel('Elapsed: 00:00:00')
+Cashcoled = labels:AddLabel('Cash Collect: 500.00k')
 local Autorob = main:Toggle('Auto Rob',function(v) getgenv().AutoRob = v end)
 local BreakOut = main:Toggle('Auto Breakout',function(v) getgenv().killaura = v end)
 local KillAura = main:Toggle('Kill Aura',function(v) getgenv().BreakOut = v end)
+local plr = game:GetService('Players').LocalPlayer
+
+local timer = 0
+
+function Concu(Int)
+	return string.format("%02i", Int)
+end
+
+
+function Concac(Time)
+	Minutes = (Time - Time%60)/60
+	Time = Time - Minutes*60
+	Hours = (Minutes - Minutes%60)/60
+	Minutes = Minutes - Hours*60
+	return Concu(Hours)..":"..Concu(Minutes)..":"..Concu(Time)
+
+end
+local suffixes = {"K", "M"}
+
+local function ditmemay(n)
+	for i = #suffixes, 1, -1 do
+		local v = math.pow(10, i * 3)
+		if n >= v then
+			return ("%.2f"):format(n / v) .. suffixes[i]
+		end
+	end
+	return tostring(n)
+end
+
+local oldcash = plr:FindFirstChild('leaderstats'):FindFirstChild('Money').Value
+
+spawn(function()
+while true do
+    if getgenv().AutoRob == true then 
+    local newcash = plr:FindFirstChild('leaderstats'):FindFirstChild('Money').Value
+    timer = timer + 1
+    Elapsed:SetText('Elapsed: '..Concac(timer))
+    Cashcoled:SetText('Cash Collect: '..ditmemay(newcash-oldcash))
+    else
+    oldcash = plr:FindFirstChild('leaderstats'):FindFirstChild('Money').Value
+    timer = 0 
+    Elapsed:SetText('Elapsed: 00:00:00')
+    Cashcoled:SetText('Cash Collect: 0')
+end
+wait(1)
+end
+end)
 getgenv().customui = true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HazeWasTaken/JailedHax/master/AutRob"))()
