@@ -1,4 +1,3 @@
-if type(Setting) ~= 'table' then Setting[1] = getgenv().Key end
 print(Setting[1])
 local buoi = [[
 getgenv().Key = "]].. Setting[1]..'"'..[[
