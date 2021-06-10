@@ -1,7 +1,7 @@
 local buoi_cua_rua = isfile("Zua_hap_key.json")
 
 if buoi_cua_rua then
-    local Buoi = Https:JSONDecode(readfile("Zua_hap_key.json"))
+    local Buoi = game:GetService("HttpService"):JSONDecode(readfile("Zua_hap_key.json"))
     getgenv().Key = Buoi["Product Key"]
     
     else
