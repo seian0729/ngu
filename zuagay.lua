@@ -1,6 +1,4 @@
-local Setting = {
-  getgenv().Key
-}
+print(getgenv().Key)
 local buoi = [[
 getgenv().Key = "]].. Setting[1]..'"'..[[
 loadstring('https://raw.githubusercontent.com/chimnguu/ngu/master/zuagay.lua')()
