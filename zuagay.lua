@@ -1,3 +1,7 @@
+local Setting = {
+  getgenv().Key
+}
+
 print(Setting[1])
 local buoi = [[
 getgenv().Key = "]].. Setting[1]..'"'..[[
