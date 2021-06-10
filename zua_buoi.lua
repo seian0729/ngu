@@ -1,3 +1,4 @@
+print('da execute')
 local buoi_cua_rua = isfile("Zua_hap_key.json")
 
 if buoi_cua_rua then
