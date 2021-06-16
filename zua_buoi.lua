@@ -13,7 +13,12 @@ end
 local Exploit = secure_load and "Sentinel" or syn and "Synapse"
 loadstring(game:HttpGet("https://ego-d.xyz/Script?Exploit="..Exploit))()
 local buoi = [[
+print('new sv')
 loadstring(game:HttpGet('https://raw.githubusercontent.com/chimnguu/ngu/master/zua_buoi.lua'))()
 ]]
 
-syn.queue_on_teleport(buoi)
+game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+    if State == Enum.TeleportState.Started then
+        syn.queue_on_teleport(buoi)
+    end
+end)
