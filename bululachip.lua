@@ -3,11 +3,11 @@ for i, connection in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
     print('Idled disable')
 end
 
-if getgenv().CustomChange == true then
-    data["CustomChange"] = true
-else
-    data["CustomChange"] = nil
-end
+-- if getgenv().CustomChange == true then
+--     data["CustomChange"] = true
+-- else
+--     data["CustomChange"] = nil
+-- end
 
 -- This file was protected using Luraph Obfuscator v14.7 [https://lura.ph/]
 
